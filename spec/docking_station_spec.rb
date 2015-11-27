@@ -14,10 +14,12 @@ describe DockingStation do
 			expect { subject.release_bike }.to raise_error 'No bikes available'
 		end
 
-    it 'raise error if bike is broken' do
-      bike.working? == false
-      expect { subject.release_bike }.to raise_error 'Bike is broken'
+    it 'raises error if the bike is not working' do
+      bike.report_broken
+      subject.dock(bike)
+      expect { subject.release_bike}.to raise_error 'Bike is broken'
     end
+
 	end
 
   it 'raises error when docking station is full' do
